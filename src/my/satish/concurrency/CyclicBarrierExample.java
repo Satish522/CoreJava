@@ -18,6 +18,19 @@ public class CyclicBarrierExample {
 		p2.start();
 		p3.start();
 		p4.start();
+		
+		Party p5 = new Party(1000, barrier, "Party5");
+		Party p6 = new Party(2000, barrier, "Party6");
+		Party p7 = new Party(3000, barrier, "Party7");
+		Party p8 = new Party(4000, barrier, "Party8");
+		
+		p5.start();
+		p6.start();
+		p7.start();
+		p8.start();
+		
+		System.out.println(Thread.currentThread().getName() 
+                + " has finished");
 	}
 
 }
@@ -36,12 +49,12 @@ class Party extends Thread{
 	public void run() {
 		
 		try {
-			System.out.println("Running Thread name "+Thread.currentThread().getName());
-			barrier.await();
 			
-			System.out.println("Thread has started ..........");
 			Thread.sleep(duration);
-			System.out.println("Thread has ending");
+			System.out.println("Running Thread name "+Thread.currentThread().getName());
+			
+			barrier.await();
+			System.out.println("Ending Thread name "+Thread.currentThread().getName());
 			
 			
 		} catch (InterruptedException | BrokenBarrierException e) {
